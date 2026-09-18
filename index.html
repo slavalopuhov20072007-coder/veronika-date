@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Приглашение на свидание | Для Вероники</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --gold-primary: #D4AF37;
+            --gold-light: #F3E5AB;
+            --bg-dark: #0a0a0a;
+            --bg-card: rgba(20, 20, 20, 0.7);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-dark);
+            color: #ffffff;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .font-serif {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .gold-text {
+            background: linear-gradient(to right, var(--gold-light), var(--gold-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0px 0px 20px rgba(212, 175, 55, 0.2);
+        }
+
+        .gold-border {
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.05);
+        }
+
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: var(--bg-dark);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 1.5s ease-in-out, visibility 1.5s;
+        }
+
+        .splash-text {
+            opacity: 0;
+            animation: fadeInOut 4s ease-in-out forwards;
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translateY(20px); filter: blur(5px); }
+            30% { opacity: 1; transform: translateY(0); filter: blur(0); }
+            70% { opacity: 1; transform: translateY(0); filter: blur(0); }
+            100% { opacity: 0; transform: translateY(-20px); filter: blur(5px); }
+        }
+
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background-color: var(--gold-primary);
+            border-radius: 50%;
+            opacity: 0;
+            animation: floatUp linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            20% { opacity: 0.8; }
+            80% { opacity: 0.5; }
+            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+        }
+
+        .glass-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .fade-in-element {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+        }
+
+        .fade-in-element.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Delay utilities */
+        .delay-100 { transition-delay: 100ms; }
+        .delay-300 { transition-delay: 300ms; }
+        .delay-500 { transition-delay: 500ms; }
+        .delay-700 { transition-delay: 700ms; }
+        .delay-900 { transition-delay: 900ms; }
+        .delay-1100 { transition-delay: 1100ms; }
+
+        /* Timer Styles */
+        .timer-box {
+            background: rgba(212, 175, 55, 0.05);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .timer-box::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 50%; height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.05), transparent);
+            animation: shine 4s infinite;
+        }
+
+        @keyframes shine {
+            100% { left: 200%; }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div id="splash-screen">
+        <h1 class="splash-text font-serif text-4xl md:text-6xl gold-text text-center px-4 leading-tight">
+            Для тебя, <br> моя любовь...
+        </h1>
+    </div>
+
+    <!-- Background particles container -->
+    <div id="particles"></div>
+
+    <main id="main-content" class="relative z-10 min-h-screen flex items-center justify-center py-16 px-4 sm:px-6 lg:px-8 hidden opacity-0 transition-opacity duration-1000">
+        
+        <div class="glass-card max-w-3xl w-full gold-border rounded-3xl p-8 md:p-14 text-center shadow-2xl relative overflow-hidden">
+            
+            <!-- Subtle glow accent behind the card -->
+            <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-3/4 h-32 bg-yellow-600/20 blur-[80px] rounded-full pointer-events-none"></div>
+
+            <div class="fade-in-element">
+                <p class="text-sm md:text-base tracking-[0.2em] uppercase text-gray-400 mb-4">Особое приглашение</p>
+                <h1 class="font-serif text-4xl md:text-6xl lg:text-7xl mb-2">Для моей любимой жены,</h1>
+                <h2 class="font-serif text-5xl md:text-7xl lg:text-8xl gold-text mb-8">Вероники Лопуховой</h2>
+            </div>
+
+            <div class="fade-in-element delay-300 my-10">
+                <p class="text-lg md:text-xl font-light leading-relaxed text-gray-200 mb-6 px-2 md:px-10">
+                    Моя любимая Вероничка, приглашаю тебя на свидание завтра. Хочу еще раз провести особенное время вместе с тобой, и еще больше влюбиться.
+                </p>
+                
+                <div class="relative py-6 px-4 md:px-12">
+                    <span class="absolute top-0 left-1/2 transform -translate-x-1/2 text-6xl text-[var(--gold-primary)] opacity-20 font-serif leading-none">"</span>
+                    <p class="font-serif italic text-2xl md:text-3xl text-[var(--gold-light)] leading-snug">
+                        «Много было жен добродетельных, но ты превзошла всех их»
+                    </p>
+                    <p class="text-sm text-gray-400 mt-4 tracking-wider uppercase">— Притчи 31:29 —</p>
+                </div>
+            </div>
+
+            <div class="fade-in-element delay-500 w-16 h-[1px] bg-gradient-to-r from-transparent via-[var(--gold-primary)] to-transparent mx-auto my-12"></div>
+
+            <div class="fade-in-element delay-700 grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                <div class="p-6 rounded-2xl bg-black/40 border border-gray-800 hover:border-[#D4AF37]/50 transition-colors duration-300">
+                    <svg class="w-8 h-8 mx-auto mb-3 text-[var(--gold-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    <p class="text-xs text-gray-400 uppercase tracking-widest mb-1">Дата</p>
+                    <p class="font-serif text-2xl text-white">19 сентября</p>
+                </div>
+                
+                <div class="p-6 rounded-2xl bg-black/40 border border-gray-800 hover:border-[#D4AF37]/50 transition-colors duration-300">
+                    <svg class="w-8 h-8 mx-auto mb-3 text-[var(--gold-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <p class="text-xs text-gray-400 uppercase tracking-widest mb-1">Время</p>
+                    <p class="font-serif text-2xl text-white">20:00</p>
+                </div>
+
+                <div class="p-6 rounded-2xl bg-black/40 border border-gray-800 hover:border-[#D4AF37]/50 transition-colors duration-300">
+                    <svg class="w-8 h-8 mx-auto mb-3 text-[var(--gold-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    <p class="text-xs text-gray-400 uppercase tracking-widest mb-1">Место</p>
+                    <p class="font-serif text-2xl text-white">Lopukhovski</p>
+                </div>
+            </div>
+
+            <div class="fade-in-element delay-900 mb-14 bg-gradient-to-b from-black/20 to-black/60 rounded-2xl p-8 border border-[var(--gold-primary)]/10">
+                <h3 class="font-serif text-2xl gold-text mb-4">В программе вечера</h3>
+                <p class="text-gray-300 font-light leading-relaxed">
+                    Эксклюзивные блюда от шеф-повара Вячеслава<br> 
+                    <span class="text-sm text-gray-500 my-2 block">и</span>
+                    совместный просмотр фильма.
+                </p>
+            </div>
+
+            <div class="fade-in-element delay-900 mb-14">
+                <p class="text-sm text-gray-400 uppercase tracking-widest mb-6">До нашей встречи осталось</p>
+                <div class="flex justify-center gap-2 md:gap-6">
+                    <div class="timer-box w-16 h-16 md:w-24 md:h-24 rounded-xl flex flex-col items-center justify-center">
+                        <span id="days" class="font-serif text-2xl md:text-4xl text-white">00</span>
+                        <span class="text-[10px] md:text-xs text-gray-400 uppercase mt-1">Дней</span>
+                    </div>
+                    <div class="timer-box w-16 h-16 md:w-24 md:h-24 rounded-xl flex flex-col items-center justify-center">
+                        <span id="hours" class="font-serif text-2xl md:text-4xl text-white">00</span>
+                        <span class="text-[10px] md:text-xs text-gray-400 uppercase mt-1">Часов</span>
+                    </div>
+                    <div class="timer-box w-16 h-16 md:w-24 md:h-24 rounded-xl flex flex-col items-center justify-center">
+                        <span id="minutes" class="font-serif text-2xl md:text-4xl text-white">00</span>
+                        <span class="text-[10px] md:text-xs text-gray-400 uppercase mt-1">Минут</span>
+                    </div>
+                    <div class="timer-box w-16 h-16 md:w-24 md:h-24 rounded-xl flex flex-col items-center justify-center">
+                        <span id="seconds" class="font-serif text-2xl md:text-4xl text-[var(--gold-primary)]">00</span>
+                        <span class="text-[10px] md:text-xs text-[var(--gold-primary)]/70 uppercase mt-1">Секунд</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fade-in-element delay-1100 mt-8 pt-8 border-t border-gray-800/50 text-right">
+                <p class="font-serif text-2xl md:text-3xl text-gray-300 italic">С любовью,</p>
+                <p class="font-serif text-xl md:text-2xl gold-text mt-2">от Тайного поклонника</p>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Splash Screen Logic
+            const splashScreen = document.getElementById('splash-screen');
+            const mainContent = document.getElementById('main-content');
+            const fadeElements = document.querySelectorAll('.fade-in-element');
+
+            // Wait for splash animation to finish, then hide it and show main content
+            setTimeout(() => {
+                splashScreen.style.opacity = '0';
+                
+                setTimeout(() => {
+                    splashScreen.style.display = 'none';
+                    mainContent.classList.remove('hidden');
+                    // Small delay before triggering fade-ins
+                    setTimeout(() => {
+                        mainContent.style.opacity = '1';
+                        fadeElements.forEach(el => el.classList.add('visible'));
+                    }, 50);
+                }, 1500); // Wait for fade out CSS transition
+
+            }, 4000); // Time to show the splash text
+
+            // 2. Generate Floating Particles
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 40;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random properties for natural look
+                const size = Math.random() * 4 + 1; // 1px to 5px
+                const posX = Math.random() * 100; // 0vw to 100vw
+                const duration = Math.random() * 10 + 10; // 10s to 20s
+                const delay = Math.random() * 15; // 0s to 15s delay
+
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${posX}vw`;
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.animationDelay = `${delay}s`;
+                
+                // Add a subtle glow to larger particles
+                if(size > 3) {
+                    particle.style.boxShadow = '0 0 8px rgba(212, 175, 55, 0.6)';
+                }
+
+                particlesContainer.appendChild(particle);
+            }
+
+            // 3. Countdown Timer Logic
+            function updateTimer() {
+                const now = new Date();
+                
+                // Target Date: September 19th 2026, 20:00:00 (Month is 0-indexed: 8 = September)
+                let targetDate = new Date(2026, 8, 19, 20, 0, 0);
+
+                const diff = targetDate - now;
+
+                // Time calculations
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                const minutes = Math.floor((diff / 1000 / 60) % 60);
+                const seconds = Math.floor((diff / 1000) % 60);
+
+                // Update DOM elements with zero padding
+                document.getElementById('days').innerText = days.toString().padStart(2, '0');
+                document.getElementById('hours').innerText = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').innerText = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').innerText = seconds.toString().padStart(2, '0');
+            }
+
+            // Initial call to prevent jump
+            updateTimer();
+            // Update every second
+            setInterval(updateTimer, 1000);
+        });
+    </script>
+</body>
+</html>
